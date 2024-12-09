@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<f:metadata>
+    <f:viewAction action="#{bikeEdit.loadData()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title>Edytowanie roweru</title>
+</h:head>
+<h:body>
+	
+	<h:form rendered="#{bikeEdit.bike != null}">
+		
+		<h:panelGrid columns="3" cellpadding="5">
+	
+			<h:outputLabel for="b-model" value="Model:" />
+			<p:inputText id="b-model" value="#{bikeEdit.bike.model}" required="true" requiredMessage="Podaj model" validatorMessage="co najwyżej 30 znaków">
+				<f:validateLength maximum="40" />
+			</p:inputText>
+			<p:message for="b-model" display="icon"/>
+		
+		</h:panelGrid>
+		
+		<p:commandButton value="Zapisz" action="#{bikeEdit.saveToDb()}" update="@form" />
+
+		<p:button value="Anuluj" outcome="bikeList" />
+		
+	</h:form>
+	
+</h:body>
+</html>
