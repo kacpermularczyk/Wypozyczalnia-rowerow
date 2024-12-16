@@ -57,26 +57,41 @@ public class BikeDAO {
 
 		// search for surname
 		String model = (String) searchParams.get("model");
-		String bikeCondition = (String) searchParams.get("bikeCondition"); //qwe
 		
 		if (model != null) {
-			if (where.isEmpty()) {
-				where = "where ";
-			} else {
-				where += "and ";
-			}
-			where += "b.model like :model ";
+			where += "and b.model like :model ";
 		}
 		
-		if (bikeCondition != null) { //qwe
-			if (where.isEmpty()) {
-				where = "where ";
-			} else {
-				where += "and ";
-			}
-			where += "b.bikeCondition like :bikeCondition ";
+		
+		String idTypeStr = (String) searchParams.get("idType");
+		Integer idType = null;
+		
+		if (idTypeStr != null) {
+		    try {
+		        // Parsowanie String na Integer
+		        idType = Integer.parseInt(idTypeStr);
+
+		        // Jeżeli konwersja się powiedzie, dodajemy warunek do zapytania
+		        where += "and b.typesOfBike.idType = :idType ";
+		    } catch (NumberFormatException e) {
+		        System.err.println("Invalid bikeCondition value: " + idTypeStr);
+		    }
 		}
 		
+		String bikeConditionStr = (String) searchParams.get("bikeCondition");
+		Integer bikeCondition = null;
+		
+		if (bikeConditionStr != null) {
+		    try {
+		        // Parsowanie String na Integer
+		        bikeCondition = Integer.parseInt(bikeConditionStr);
+
+		        // Jeżeli konwersja się powiedzie, dodajemy warunek do zapytania
+		        where += "and b.bikeCondition = :bikeCondition ";
+		    } catch (NumberFormatException e) {
+		        System.err.println("Invalid bikeCondition value: " + bikeConditionStr);
+		    }
+		}
 		// ... other parameters ... 
 
 		// 2. Create query object
@@ -87,8 +102,12 @@ public class BikeDAO {
 			query.setParameter("model", model+"%");
 		}
 		
+		if (idType != null) {
+			query.setParameter("idType", idType);
+		}
+		
 		if (bikeCondition != null) { //qwe
-			query.setParameter("bikeCondition", bikeCondition+"%");
+			query.setParameter("bikeCondition", bikeCondition);
 		}
 
 		// ... other parameters ... 

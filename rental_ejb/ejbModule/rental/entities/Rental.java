@@ -20,7 +20,7 @@ public class Rental implements Serializable {
 	@Column(name="id_rental")
 	private int idRental;
 
-	private byte accepted;
+	private int accepted;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_end")
@@ -31,10 +31,10 @@ public class Rental implements Serializable {
 	private Date dateStart;
 
 	@Column(name="not_returned_in_term")
-	private byte notReturnedInTerm;
+	private int notReturnedInTerm;
 
 	@Column(name="returned_in_term")
-	private byte returnedInTerm;
+	private int returnedInTerm;
 
 	//bi-directional many-to-one association to Bike
 	@ManyToOne
@@ -57,11 +57,11 @@ public class Rental implements Serializable {
 		this.idRental = idRental;
 	}
 
-	public byte getAccepted() {
+	public int getAccepted() {
 		return this.accepted;
 	}
 
-	public void setAccepted(byte accepted) {
+	public void setAccepted(int accepted) {
 		this.accepted = accepted;
 	}
 
@@ -81,19 +81,19 @@ public class Rental implements Serializable {
 		this.dateStart = dateStart;
 	}
 
-	public byte getNotReturnedInTerm() {
+	public int getNotReturnedInTerm() {
 		return this.notReturnedInTerm;
 	}
 
-	public void setNotReturnedInTerm(byte notReturnedInTerm) {
+	public void setNotReturnedInTerm(int notReturnedInTerm) {
 		this.notReturnedInTerm = notReturnedInTerm;
 	}
 
-	public byte getReturnedInTerm() {
+	public int getReturnedInTerm() {
 		return this.returnedInTerm;
 	}
 
-	public void setReturnedInTerm(byte returnedInTerm) {
+	public void setReturnedInTerm(int returnedInTerm) {
 		this.returnedInTerm = returnedInTerm;
 	}
 

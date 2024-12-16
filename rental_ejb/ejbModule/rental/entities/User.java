@@ -28,7 +28,7 @@ public class User implements Serializable {
 	private String firstName;
 
 	@Column(name="is_active")
-	private byte isActive;
+	private int isActive;
 
 	private String login;
 
@@ -84,11 +84,11 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public byte getIsActive() {
+	public int getIsActive() {
 		return this.isActive;
 	}
 
-	public void setIsActive(byte isActive) {
+	public void setIsActive(int isActive) {
 		this.isActive = isActive;
 	}
 

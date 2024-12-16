@@ -21,7 +21,7 @@ public class Bike implements Serializable {
 	private Integer idBike;
 
 	@Column(name="bike_condition")
-	private String bikeCondition;
+	private int bikeCondition;
 
 	private String description;
 
@@ -50,15 +50,15 @@ public class Bike implements Serializable {
 		return this.idBike;
 	}
 
-	public void setIdBike(int idBike) {
+	public void setIdBike(Integer idBike) {
 		this.idBike = idBike;
 	}
 
-	public String getBikeCondition() {
+	public int getBikeCondition() {
 		return this.bikeCondition;
 	}
 
-	public void setBikeCondition(String bikeCondition) {
+	public void setBikeCondition(int bikeCondition) {
 		this.bikeCondition = bikeCondition;
 	}
 

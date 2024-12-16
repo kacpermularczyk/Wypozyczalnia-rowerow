@@ -20,8 +20,8 @@ public class Role implements Serializable {
 	@Column(name="id_role")
 	private int idRole;
 
-	@Column(name="is_activated")
-	private byte isActivated;
+	@Column(name="is_active")
+	private int isActive;
 
 	private String role;
 
@@ -40,12 +40,12 @@ public class Role implements Serializable {
 		this.idRole = idRole;
 	}
 
-	public byte getIsActivated() {
-		return this.isActivated;
+	public int getIsActive() {
+		return this.isActive;
 	}
 
-	public void setIsActivated(byte isActivated) {
-		this.isActivated = isActivated;
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
 	}
 
 	public String getRole() {

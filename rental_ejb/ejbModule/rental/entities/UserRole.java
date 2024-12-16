@@ -28,8 +28,8 @@ public class UserRole implements Serializable {
 	@Column(name="active_until")
 	private Date activeUntil;
 
-	@Column(name="is_activated")
-	private byte isActivated;
+	@Column(name="is_active")
+	private int isActive;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -68,12 +68,12 @@ public class UserRole implements Serializable {
 		this.activeUntil = activeUntil;
 	}
 
-	public byte getIsActivated() {
-		return this.isActivated;
+	public int getIsActive() {
+		return this.isActive;
 	}
 
-	public void setIsActivated(byte isActivated) {
-		this.isActivated = isActivated;
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
 	}
 
 	public User getUser() {
