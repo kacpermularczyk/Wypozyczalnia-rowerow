@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<f:metadata>
+    <f:viewAction action="#{bikeEdit.loadData()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title>Edytowanie roweru</title>
+	
+</h:head>
+<h:body>
+	
+	<p:panel header="Edycja">
+		<h:form rendered="#{bikeEdit.bike != null}">
+		
+			<p:growl id="growl" showDetail="true" />
+		
+			<h:panelGrid columns="2" cellpadding="5">
+		
+				<h:outputLabel for="b-model" value="Model:" />
+				<p:inputText id="b-model" value="#{bikeEdit.bike.model}" required="true" requiredMessage="Podaj model" validatorMessage="Model ma mieć co najwyżej 30 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				
+				
+				<h:outputLabel value="Typ:" />
+				<p:selectOneMenu value="#{bikeEdit.bike.typesOfBike.idType}">
+	            	<f:selectItem itemLabel="Wybierz opcję" itemValue=""/>
+	            	<f:selectItems value="#{bikeList.fullTypesList}" var="t" itemLabel="#{t.type}" itemValue="#{t.idType}"/>
+                </p:selectOneMenu>
+				
+				
+				
+				<h:outputLabel for="b-price" value="Cena:"/>
+				<p:inputNumber id="b-price" value="#{bikeEdit.bike.price}" minValue="10" maxValue="100" decimalPlaces="2" />
+				
+				
+				
+				<h:outputLabel for="b-bikeCondition" value="Dostępność:" />
+				<p:selectOneMenu id="b-bikeCondition" value="#{bikeEdit.bike.bikeCondition}">
+					<f:selectItem itemLabel="Dostępny" itemValue="1"/>
+					<f:selectItem itemLabel="Niedostępny" itemValue="0"/>
+                </p:selectOneMenu>
+				
+				
+				
+				<h:outputLabel for="b-picture" value="Url do obrazka:" />
+				<p:inputTextarea id="b-picture" rows="5" cols="30" value="#{bikeEdit.bike.picture}" required="true" requiredMessage="Podaj url do obrazka" validatorMessage="Link do zdjęcia ma mieć co najwyżej 100 znaków">
+					<f:validateLength maximum="100" />
+				</p:inputTextarea>
+				
+				
+				
+				<h:outputLabel for="b-description" value="Opis:" />
+				<p:inputTextarea id="b-description" rows="5" cols="30" value="#{bikeEdit.bike.description}" required="true" requiredMessage="Podaj opis" validatorMessage="Opis ma mieć co najwyżej 300 znaków">
+					<f:validateLength maximum="300" />
+				</p:inputTextarea>
+				
+				
+				
+				<p:commandButton value="Zapisz" action="#{bikeEdit.saveToDb()}" update="@form" />
+				<p:button value="Anuluj" outcome="bikeList" />
+			
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+	
+</h:body>
+</html>
