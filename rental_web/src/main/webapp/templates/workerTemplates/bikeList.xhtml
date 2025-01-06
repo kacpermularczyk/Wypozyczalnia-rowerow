@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+	<p:panel header="Rowery" toggleable="true" collapsed="true">
+		
+		<p:panel header="Wyszukaj rower" toggleable="true" collapsed="true">
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+				
+					<h:outputLabel value="Model:" />
+					<p:inputText value="#{bikeList.model}" />
+					
+					<h:outputLabel value="Typ:" />
+					<p:selectOneMenu value="#{bikeList.idType}">
+	                    <f:selectItem itemLabel="Wybierz opcję" itemValue=""/>
+	                    <f:selectItems value="#{bikeList.fullTypesList}" var="t" itemLabel="#{t.type}" itemValue="#{t.idType}"/>
+                	</p:selectOneMenu>
+					
+					<h:outputLabel value="Dostępność:" />
+					<p:selectOneMenu value="#{bikeList.bikeCondition}">
+	                    <f:selectItem itemLabel="Wybierz opcję" itemValue=""/>
+	                    <f:selectItem itemLabel="Dostępny" itemValue="1"/>
+	                    <f:selectItem itemLabel="Niedostępny" itemValue="0"/>
+                	</p:selectOneMenu>
+					
+					<p:commandButton value="Szukaj" update="formTableBike" />
+					
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+		
+		<br></br>
+
+		<p:commandButton value="Dodaj rower" action="#{bikeList.newBike()}"/>
+		
+		<br></br><br></br>
+		
+		<h:form id="formTableBike">
+	
+			<p:dataTable value="#{bikeList.listWithParams}" var="b" reflow="true">
+	
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Model" />
+					</f:facet>
+					<h:outputText value="#{b.model}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Typ" />
+					</f:facet>
+					<h:outputText value="#{b.typesOfBike.type}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Cena" />
+					</f:facet>
+					<h:outputText value="#{b.price}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Opis" />
+					</f:facet>
+					<h:outputText value="#{b.description}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Dostępność" />
+					</f:facet>
+					<h:outputText value="#{bikeList.printBikeCondition(b.bikeCondition)}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Zdjęcie" />
+					</f:facet>
+					<p:graphicImage class="imgInColumn" value="#{b.picture}"/>
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Opcje" />
+					</f:facet>
+					
+					 <p:commandButton action="#{bikeList.editBike(b)}" icon="pi pi-search" styleClass="rounded-button ui-button-success" />
+					 <p:commandButton action="#{bikeList.turnOffBike(b)}" icon="pi pi-times" styleClass="rounded-button ui-button-danger" update="formTableBike" />
+				</p:column>
+				
+			</p:dataTable>
+			
+		</h:form>
+	
+	</p:panel>
+	
+</ui:composition>

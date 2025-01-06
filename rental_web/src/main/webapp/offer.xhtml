@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<title>Oferta</title>
+	
+	<style>
+		body {
+			background: #FAFAFA;
+		}
+		.forImagesInOfferPage {
+			width: 90%;
+			height: 90%;
+		}
+		.contentToCenter {
+			text-align: center;
+		}
+		
+		.mainLabel {
+			border: 3px solid #1b1b1b;
+			border-radius: 10px;
+			
+			height: 100%;
+			
+			
+		}
+		.toRight {
+			text-align: right;
+			margin-right: 10px;
+			font-weight: bold;
+		}
+		.imgLabel {
+			display: flex;
+			justify-content: center;
+		}
+		.imgLabel img {
+			border: 3px solid #1b1b1b;
+			border-radius: 10px;
+		}
+		.toCenter {
+			text-align: center;
+			font-weight: bold;
+		}
+		.flexIt {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			font-weight: bold;
+		}
+		.forDescription {
+			margin: 10px;
+			text-align: center;
+		}
+	</style>
+	
+</h:head>
+<h:body>
+
+	<ui:insert>
+		<ui:include src="templates/header.xhtml" />
+	</ui:insert>
+	<br></br>
+
+	<h:form>
+		<p:dataGrid var="b" value="#{bikeList.listWithParams}" columns="4" layout="grid"
+		rows="12" paginator="true" id="cars"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="4,8,12">
+		
+			<f:facet name="header">
+                Rowery w ofercie
+            </f:facet>
+            
+            
+            <div class="mainLabel">
+            	
+            	<p class="toRight">#{bikeList.printBikeCondition(b.bikeCondition)}</p>
+            	
+            	<div class="imgLabel">
+            		<p:graphicImage class="forImagesInOfferPage" value="#{b.picture}"/>
+            	</div>
+            	
+            	<p class="toCenter">#{b.model}</p>
+            	<p class="toCenter">#{b.typesOfBike.type}</p>
+            		
+            	<div class="flexIt">
+            		#{b.price} zł/h <p:commandButton value="Zarezerwuj" icon="pi pi-shopping-cart"/>
+            	</div>
+            	
+            	<p class="forDescription">#{b.description}</p>
+            		
+            </div>
+            
+		</p:dataGrid>
+	</h:form>
+
+</h:body>
+</html>

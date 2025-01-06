@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<title>Logowanie</title>
+	
+	<style>
+		body {
+			background: #FAFAFA;
+		}
+		.imgInColumn {
+			width: 100%;
+			height: 100%;
+		}
+		.contentToCenter {
+			text-align: center;
+		}
+	</style>
+	
+</h:head>
+<h:body>
+
+	<ui:insert>
+		<ui:include src="templates/header.xhtml" />
+	</ui:insert>
+	<br></br>
+
+	<p:panel header="Logowanie">
+		<h:form>
+		
+			<p:growl id="growl"/>
+			
+			<h:panelGrid columns="1" cellpadding="5">
+			
+				<h:panelGroup styleClass="ui-float-label">
+					<p:inputText id="login" value="#{login.login}" required="true" requiredMessage="Podaj login"/>
+	       			<p:outputLabel for="@previous" value="Login"/>
+				</h:panelGroup>
+				
+				<h:panelGroup styleClass="ui-float-label">
+					<p:inputText id="password" value="#{login.password}" required="true" requiredMessage="Podaj hasło"/>
+	       			<p:outputLabel for="@previous" value="Hasło"/>
+				</h:panelGroup>
+				
+				<p:commandButton action="#{login.loginToSystem()}" value="Zaloguj się" update="@form"/>
+				
+				<p:commandButton rendered="#{login.generate == 1}" value="Jest ok :)"/>
+				
+			</h:panelGrid>
+		
+		</h:form>
+	</p:panel>
+
+</h:body>
+</html>
