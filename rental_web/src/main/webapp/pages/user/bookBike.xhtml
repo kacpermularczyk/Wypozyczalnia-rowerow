@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<f:metadata>
+    <f:viewAction action="#{bookBike.loadData()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title>Edytowanie roweru</title>
+	
+</h:head>
+<h:body>
+	
+	<p:panel header="Rezerwacja roweru">
+		<h:form rendered="#{bookBike.bike != null}">
+		
+			<p:growl id="growl" showDetail="true" />
+		
+			<h:panelGrid columns="2" cellpadding="5">
+						
+				<p:outputLabel for="start" value="Od kiedy" />
+				<p:datePicker id="start" value="#{bookBike.rental.dateStart}" showTime="true" />
+				
+				<p:outputLabel for="end" value="Do kiedy" />
+				<p:datePicker id="end" value="#{bookBike.rental.dateEnd}" showTime="true" />		
+				
+				<p:commandButton value="Zarezerwuj #{bookBike.bike.model}" action="#{bookBike.saveToDb()}" update="@form" />
+				<p:button value="Anuluj" outcome="/public/offer" />
+			
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+	
+</h:body>
+</html>
