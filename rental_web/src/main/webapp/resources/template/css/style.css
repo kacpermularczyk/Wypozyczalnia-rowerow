@@ -1,0 +1,98 @@
+body {
+	background: #FAFAFA;
+}
+.imgInColumn {
+	width: 100%;
+	height: 100%;
+}
+.contentToCenter {
+	text-align: center;
+}
+.forImagesInOfferPage {
+	width: 90%;
+	height: 90%;
+}
+.mainLabel {
+	border: 3px solid #1b1b1b;
+	border-radius: 10px;
+			
+	height: 100%;		
+}
+.toRight {
+	text-align: right;
+	margin-right: 10px;
+	font-weight: bold;
+}
+.imgLabel {
+	display: flex;
+	justify-content: center;
+}
+.imgLabel img {
+	border: 3px solid #1b1b1b;
+	border-radius: 10px;
+}
+.toCenter {
+	text-align: center;
+	font-weight: bold;
+}
+.flexIt {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	font-weight: bold;
+}
+.forDescription {
+	margin: 10px;
+	text-align: center;
+}
+
+/* ---------- MAIN PAGE ---------- */
+
+.mainPageBody {
+	background-image: url("https://cdn.pixabay.com/photo/2024/08/19/15/48/bear-8981066_1280.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.label {
+	width: 100vw;
+	height: 100vh;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.main {
+	width: 450px;
+	height: 450px;
+	
+	background: rgba(27,27,27,0.3);
+	backdrop-filter: blur(5px);
+	
+	border: #1b1b1b solid 3px;
+	border-radius: 15px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	
+	font-size: 30px;
+	color: white;
+}
+.mainPageTitle {
+	padding-bottom: 5px;
+	border-bottom: 3px solid white;
+}
+.address {
+	font-size: 20px;
+}
+.information {
+	font-size: 15px;
+}
+.information a {
+	text-decoration: none;
+	color: orange;
+}

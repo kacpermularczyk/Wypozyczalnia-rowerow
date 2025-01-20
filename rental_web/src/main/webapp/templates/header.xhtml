@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+	<div class="contentToCenter">
+	<p:menubar>
+		 <p:menuitem value="Strona główna" outcome="/public/mainPage" icon="pi pi-fw pi-calendar"/>
+		 <p:menuitem value="Oferta" outcome="/public/offer" icon="pi pi-fw pi-bookmark"/>
+		 <p:menuitem rendered="#{remoteClient.roles != null}" value="Moje konto" outcome="/pages/user/userPanel" icon="pi pi-fw pi-user"/>
+		 <p:menuitem rendered="#{remoteClient.isInRole('worker')}" value="Pracownik" outcome="/pages/worker/workerPanel" icon="pi pi-fw pi-pencil"/>
+		 <p:menuitem rendered="#{remoteClient.isInRole('admin')}" value="Admin" outcome="/pages/admin/adminPanel" icon="pi pi-fw pi-pencil"/>
+		 <p:menuitem rendered="#{remoteClient.roles == null}" value="Logowanie" outcome="/public/login" icon="pi pi-fw pi-user"/>
+		 <p:menuitem rendered="#{remoteClient.roles == null}" value="Rejestracja" outcome="/public/registration" icon="pi pi-fw pi-user"/>
+		 <p:menuitem rendered="#{remoteClient.roles != null}" action="#{login.logOut}" value="Wyloguj (#{remoteClient.details.user.login})" icon="pi pi-fw pi-power-off"/>
+	</p:menubar>
+	</div>
+
+</ui:composition>

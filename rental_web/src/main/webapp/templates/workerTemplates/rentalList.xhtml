@@ -1,0 +1,197 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<p:panel header="Rezerwacje" toggleable="true" collapsed="true">
+				
+		<p:panel header="Do akceptacji" toggleable="true" collapsed="true">
+		
+			
+			<p:panel header="Wyszukaj rezerwację do akceptacji" toggleable="true" collapsed="true">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+					
+						<h:outputLabel value="Nazwisko:" />
+						<p:inputText value="#{rentalList.surname}" />
+						
+						
+						<h:outputLabel value="E-mail:" />
+						<p:inputText value="#{rentalList.e_mail}" />
+						
+						
+						<h:outputLabel value="Rower:" />
+						<p:inputText value="#{rentalList.model}" />
+						
+						<p:commandButton value="Szukaj" update="formTableRental1" />
+						
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		
+		<br></br>
+			
+		
+			<h:form id="formTableRental1">
+	
+			<p:dataTable value="#{rentalList.rentalsToAcceptListWithParams}" var="r" reflow="true">
+	
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Imie" />
+					</f:facet>
+					<h:outputText value="#{r.user.firstName}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Nazwisko" />
+					</f:facet>
+					<h:outputText value="#{r.user.surname}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="E-mail" />
+					</f:facet>
+					<h:outputText value="#{r.user.e_mail}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Rower" />
+					</f:facet>
+					<h:outputText value="#{r.bike.model}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Ile zapłacił (zł)" />
+					</f:facet>
+					<h:outputText value="#{r.price}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="okres wypożyczenia" />
+					</f:facet>
+					<h:outputText value="od #{r.dateStart} do #{r.dateEnd}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Czy akceptujesz?" />
+					</f:facet>
+					<p:commandButton action="#{rentalList.acceptRental(r)}" value="TAK" update="formTableRental1 formTableRental2"/>
+					<p:commandButton action="#{rentalList.dontAcceptRentalSoRemoveRecordFromDb(r)}" value="NIE" update="formTableRental1"/>
+				</p:column>
+				
+			</p:dataTable>
+			
+		</h:form>
+		
+		</p:panel>
+		
+		
+		<br></br>
+		
+		
+		
+		<p:panel header="Zaakceptowanee" toggleable="true" collapsed="true">
+		
+		<p:panel header="Wyszukaj rezerwację" toggleable="true" collapsed="true">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+					
+						<h:outputLabel value="Nazwisko:" />
+						<p:inputText value="#{rentalList.surname}" />
+						
+						
+						<h:outputLabel value="E-mail:" />
+						<p:inputText value="#{rentalList.e_mail}" />
+						
+						
+						<h:outputLabel value="Rower:" />
+						<p:inputText value="#{rentalList.model}" />
+						
+		
+						<h:outputLabel value="Oddany w terminie:" />
+						<p:selectOneMenu value="#{rentalList.returnedInTerm}">
+		                    <f:selectItem itemLabel="Wybierz opcję" itemValue=""/>
+		                    <f:selectItem itemLabel="Tak" itemValue="1"/>
+		                    <f:selectItem itemLabel="Nie" itemValue="0"/>
+	                	</p:selectOneMenu>
+						
+						<p:commandButton value="Szukaj" update="formTableRental2" />
+						
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		
+		<br></br>
+		
+			<h:form id="formTableRental2">
+	
+			<p:dataTable value="#{rentalList.acceptedRentalsListWithParams}" var="r" reflow="true"  >
+	
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Imie" />
+					</f:facet>
+					<h:outputText value="#{r.user.firstName}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Nazwisko" />
+					</f:facet>
+					<h:outputText value="#{r.user.surname}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="E-mail" />
+					</f:facet>
+					<h:outputText value="#{r.user.e_mail}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Rower" />
+					</f:facet>
+					<h:outputText value="#{r.bike.model}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Ile zapłacił (zł)" />
+					</f:facet>
+					<h:outputText value="#{r.price}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="okres wypożyczenia" />
+					</f:facet>
+					<h:outputText value="od #{r.dateStart} do #{r.dateEnd}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Czy oddano w terminie?" />
+					</f:facet>
+					<p:commandButton action="#{rentalList.setReturnedInTerm(r, 1)}" value="TAK" update="formTableRental2" rendered="#{r.returnedInTerm == null}"/>
+					<p:commandButton action="#{rentalList.setReturnedInTerm(r, 0)}" value="NIE" update="formTableRental2" rendered="#{r.returnedInTerm == null}"/>
+					<h:outputText value="#{rentalList.printReturnedInTermInString(r.returnedInTerm)}" rendered="#{r.returnedInTerm != null}"/>
+				</p:column>
+				
+			</p:dataTable>
+			
+		</h:form>
+		
+		</p:panel>
+	
+	</p:panel>
+	
+</ui:composition>

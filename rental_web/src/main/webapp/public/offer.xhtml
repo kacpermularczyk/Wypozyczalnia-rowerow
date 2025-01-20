@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<title>Oferta</title>
+	<h:outputStylesheet name="css/style.css" library="template" />
+</h:head>
+<h:body>
+
+	<ui:insert>
+		<ui:include src="../templates/header.xhtml" />
+	</ui:insert>
+	<br></br>
+	
+	<p:panel header="Wyszukaj rower" toggleable="true" collapsed="true">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+			
+				<h:outputLabel value="Model:" />
+				<p:inputText value="#{offer.model}" />
+				
+				<h:outputLabel value="Typ:" />
+				<p:selectOneMenu value="#{offer.idType}">
+                    <f:selectItem itemLabel="Wybierz opcję" itemValue=""/>
+                    <f:selectItems value="#{bikeList.fullTypesList}" var="t" itemLabel="#{t.type}" itemValue="#{t.idType}"/>
+               	</p:selectOneMenu>
+				
+				<h:outputLabel value="Dostępność:" />
+				<p:selectOneMenu value="#{offer.bikeCondition}">
+                    <f:selectItem itemLabel="Wybierz opcję" itemValue=""/>
+                    <f:selectItem itemLabel="Dostępny" itemValue="1"/>
+                    <f:selectItem itemLabel="Niedostępny" itemValue="0"/>
+               	</p:selectOneMenu>
+				
+				<p:commandButton action="#{offer.init}" value="Szukaj" update="formTableBike" />
+				
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+
+	<h:form id="formTableBike">
+		<p:growl id="growl"/>
+	
+		<p:dataGrid var="b" value="#{offer.lazyModel}" columns="4" layout="grid"
+		lazy="true" rows="12" paginator="true" id="cars"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="4,8,12">
+            
+            <div class="mainLabel">
+            	
+            	<p class="toRight">#{bikeList.printBikeCondition(b.bikeCondition)}</p>
+            	
+            	<div class="imgLabel">
+            		<p:graphicImage class="forImagesInOfferPage" value="#{b.picture}"/>
+            	</div>
+            	
+            	<p class="toCenter">#{b.model}</p>
+            	<p class="toCenter">#{b.typesOfBike.type}</p>
+            		
+            	<div class="flexIt">
+            		#{b.price} zł/h <p:commandButton action="#{offer.newRental(b)}" value="Zarezerwuj" icon="pi pi-shopping-cart" update="@form"/>
+            	</div>
+            	
+            	<p class="forDescription">#{b.description}</p>
+            		
+            </div>
+            
+		</p:dataGrid>
+	</h:form>
+
+</h:body>
+</html>

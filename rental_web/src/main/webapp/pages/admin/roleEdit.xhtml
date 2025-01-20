@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<f:metadata>
+    <f:viewAction action="#{roleEdit.loadData()}" />
+</f:metadata>
+
+<h:head>
+	<meta charset="utf-8"/>
+	<title>Edytowanie Roli</title>
+	<h:outputStylesheet name="css/style.css" library="template" />
+</h:head>
+<h:body>
+	
+	<p:panel header="Edycja">
+		<h:form rendered="#{roleEdit.role != null}">
+		
+			<p:growl id="growl" showDetail="true" />
+		
+			<h:panelGrid columns="2" cellpadding="5">
+		
+				<h:outputLabel for="t-type" value="Nazwa:" />
+				<p:inputText id="t-type" value="#{roleEdit.role.role}" required="true" requiredMessage="Podaj nazwę" validatorMessage="Nazwa ma mieć co najwyżej 30 znaków">
+					<f:validateLength maximum="30" />
+				</p:inputText>				
+				
+				<p:commandButton value="Zapisz" action="#{roleEdit.saveToDb()}" update="@form" />
+				<p:button value="Anuluj" outcome="adminPanel" />
+			
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+	
+</h:body>
+</html>

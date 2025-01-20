@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+	<p:panel header="Historia zamówień" toggleable="true" collapsed="true">
+		
+		<h:form>
+	
+			<p:dataTable value="#{userPanel.getUserRentalsById(remoteClient.details.user)}" var="r" reflow="true">
+	
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Rower" />
+					</f:facet>
+					<h:outputText value="#{r.bike.model}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Typ" />
+					</f:facet>
+					<h:outputText value="#{r.bike.typesOfBike.type}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Ile zapłaciłeś/zapłaciłaś (zł)" />
+					</f:facet>
+					<h:outputText value="#{r.price}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Okres wypożyczenia" />
+					</f:facet>
+					<h:outputText value="od #{r.dateStart} do #{r.dateEnd}" />
+				</p:column>
+				
+				<p:column class="contentToCenter">
+					<f:facet name="header">
+						<h:outputText value="Status" />
+					</f:facet>
+					<h:outputText value="#{userPanel.printReturnedInTermAsString(r.returnedInTerm)}" />
+				</p:column>
+				
+			</p:dataTable>
+			
+		</h:form>
+	
+	</p:panel>
+	
+</ui:composition>
